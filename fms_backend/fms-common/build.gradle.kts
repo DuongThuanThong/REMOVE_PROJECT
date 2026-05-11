@@ -2,8 +2,6 @@ plugins {
     `java-library`
 }
 
-tasks.jar { enabled = true }
-
 dependencies {
     // Gọi thư viện thoải mái không cần version, vì Root đã phát sổ BOM rồi!
     api("org.springframework.boot:spring-boot-starter-data-jpa")
