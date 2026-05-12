@@ -2,6 +2,7 @@ package com.uth.fms.common.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
@@ -24,22 +25,23 @@ public abstract class BaseEntity {
     Long id;
 
     @LastModifiedDate
-    @Column(name = "update_at", updatable = false, nullable = false)
+    @Column(name = "updated_at", nullable = false)
     LocalDateTime updateTime;
 
     @CreatedDate
-    @Column(name = "create_at", updatable = false, nullable = false)
+    @Column(name = "created_at", nullable = false)
     LocalDateTime createTime;
 
     @CreatedBy
-    @Column(name = "created_by", updatable = false)
-    private String createdBy;
+    @Column(name = "created_by")
+    Long createdBy;
 
     @LastModifiedBy
     @Column(name = "updated_by")
-    private String updatedBy;
+    Long updatedBy;
 
     @Column(name = "is_deleted")
-    Boolean deleteFlag;
+    @Builder.Default
+    Boolean deleteFlag = false;
 
 }
