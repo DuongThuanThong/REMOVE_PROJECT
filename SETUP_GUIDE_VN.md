@@ -29,7 +29,11 @@ Mở VS Code và chọn thư mục `fms_backend`.
 ### Bước 2: Cấu hình biến môi trường
 1. Tìm file `.env.example` trong thư mục `fms_backend`.
 2. Sao chép và đổi tên thành `.env`.
-3. Mở file `.env` và điền các giá trị phù hợp (ví dụ: `POSTGRES_DB=fms_db`, `POSTGRES_USER=postgres`, `POSTGRES_PASSWORD=123456789`).
+3. Mở file `.env` và kiểm tra các giá trị:
+   - `POSTGRES_DB`: Tên cơ sở dữ liệu.
+   - `POSTGRES_USER`: Tên đăng nhập.
+   - `POSTGRES_PASSWORD`: Mật khẩu.
+   - `POSTGRES_PORT`: Cổng (mặc định 5432).
 
 ### Bước 3: Chạy Cơ sở dữ liệu bằng Docker
 Mở terminal trong VS Code (Ctrl + `) và chạy lệnh:
@@ -37,7 +41,7 @@ Mở terminal trong VS Code (Ctrl + `) và chạy lệnh:
 cd fms_backend
 docker-compose up -d
 ```
-Lệnh này sẽ khởi chạy PostgreSQL và Redis trên máy của bạn.
+**Lưu ý:** Đảm bảo Docker Desktop đã được mở và đang chạy.
 
 ### Bước 4: Chạy ứng dụng Spring Boot
 Bạn có hai cách để chạy:
@@ -72,7 +76,19 @@ Mặc định ứng dụng sẽ chạy tại địa chỉ: [http://localhost:517
 
 ---
 
-## 5. Lưu ý
-- Đảm bảo Docker đang chạy trước khi khởi động Backend.
-- Nếu gặp lỗi về quyền thực thi đối với `gradlew`, hãy chạy lệnh: `chmod +x gradlew` (trên Linux/macOS).
-- Kiểm tra cổng (Port) trong file `.env` và `application.yaml` để tránh xung đột với các ứng dụng khác.
+## 5. Xử lý lỗi thường gặp
+
+### Lỗi: `Connection to localhost:5432 refused`
+Lỗi này xảy ra khi Backend không thể kết nối tới cơ sở dữ liệu PostgreSQL.
+**Cách khắc phục:**
+1. **Kiểm tra Docker:** Chạy lệnh `docker ps` để xem container `fms_postgres` có đang chạy hay không. Nếu không, hãy chạy lại `docker-compose up -d`.
+2. **Kiểm tra biến môi trường:** Đảm bảo file `.env` đã được tạo và chứa đúng thông tin như trong `docker-compose.yml`.
+3. **Chờ Database khởi động:** Đôi khi Database cần vài giây để sẵn sàng nhận kết nối sau khi chạy Docker. Hãy thử chạy lại Backend sau 10-15 giây.
+
+### Lỗi: `Permission denied` khi chạy `./gradlew`
+**Cách khắc phục:** Chạy lệnh `chmod +x gradlew` trong thư mục `fms_backend`.
+
+---
+
+## 6. Lưu ý
+- Kiểm tra cổng (Port) trong file `.env` để tránh xung đột với các ứng dụng khác đang chạy trên máy.
