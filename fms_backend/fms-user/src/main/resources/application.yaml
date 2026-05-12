@@ -1,8 +1,0 @@
-spring:
-  application:
-    name: fms-user
-
-app:
-  jwt:
-    secret:${JWT_SECRET}
-    expiration:${JWT_EXPIRATION}

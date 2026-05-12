@@ -81,7 +81,7 @@ public class AuthServiceImpl implements AuthService {
             validationErrors.add("Email đã tồn tại");
         }
 
-        if (request.getPhoneNumber() != null && userRepository.existsByPhone(request.getPhoneNumber())) {
+        if (request.getPhoneNumber() != null && userRepository.existsByPhoneNumber(request.getPhoneNumber())) {
             validationErrors.add("SĐT đã tồn tại");
         }
 

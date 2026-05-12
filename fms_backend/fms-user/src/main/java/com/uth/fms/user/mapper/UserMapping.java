@@ -10,11 +10,11 @@ import org.mapstruct.Mapping;
 @Mapper(config = MapperConfig.class)
 public interface UserMapping {
     @Mapping(target = "password", ignore = true) // Chặn vì phía service sẽ lưu mk mã hóa
-    @Mapping(target = "isActive", constant = "true")
+    @Mapping(target = "enabled", constant = "true")
     User toEntity(RegisterRequest request);
 
     @Mapping(target = "accessToken", ignore = true )
     @Mapping(target = "refreshToken", ignore = true )
-    @Mapping(target = "roles" , expression = "java(user.getRole().name())") // Chuyển đổi từ Role (enum) thành String
+    @Mapping(target = "roles" , expression = "java(user.getRoles().name())") // Chuyển đổi từ Roles (enum) thành String
     LoginResponse toLoginResponse(User user);
 }

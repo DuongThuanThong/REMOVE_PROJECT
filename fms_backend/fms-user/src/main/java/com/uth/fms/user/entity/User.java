@@ -2,9 +2,7 @@ package com.uth.fms.user.entity;
 
 import com.uth.fms.common.entity.BaseEntity;
 import com.uth.fms.common.enums.RolesEnum;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -32,9 +30,11 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     String phoneNumber;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    Enum<RolesEnum> roles;
+    RolesEnum roles;
 
+    @Builder.Default
     @Column(name = "is_active", nullable = false)
     Boolean enabled = true;
 

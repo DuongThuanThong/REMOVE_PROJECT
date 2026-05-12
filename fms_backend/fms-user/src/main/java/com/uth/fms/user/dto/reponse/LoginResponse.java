@@ -1,14 +1,13 @@
 package com.uth.fms.user.dto.reponse;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Builder(toBuilder = true)
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoginResponse {
     String accessToken;
     String refreshToken;
@@ -16,5 +15,5 @@ public class LoginResponse {
     String tokenType = "Bearer";
     String username;
     String fullName;
-    String roleS;
+    String roles;
 }
