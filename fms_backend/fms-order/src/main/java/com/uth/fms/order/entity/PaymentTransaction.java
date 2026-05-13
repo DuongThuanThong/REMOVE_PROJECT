@@ -1,0 +1,65 @@
+package com.uth.fms.order.entity;
+
+import com.uth.fms.common.enums.PaymentMethod;
+import com.uth.fms.common.enums.PaymentType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
+@Entity
+@Table(name = "payment_transactions")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class PaymentTransaction {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Long id;
+
+	@Column(name = "order_id", nullable = false)
+	Long orderId;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "type", nullable = false, length = 20)
+	PaymentType type;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "method", nullable = false, length = 20)
+	PaymentMethod method;
+
+	@Column(name = "amount", nullable = false, precision = 15, scale = 2)
+	BigDecimal amount;
+
+	@Column(name = "receipt_image_url", length = 500)
+	String receiptImageUrl;
+
+	@Column(name = "recorded_by", nullable = false)
+	Long recordedBy;
+
+	@Column(name = "created_at", updatable = false)
+	LocalDateTime createdAt;
+
+	@PrePersist
+	protected void onCreate() {
+		if (this.createdAt == null) {
+			this.createdAt = LocalDateTime.now();
+		}
+	}
+}
