@@ -3,11 +3,15 @@ package com.uth.fms.order.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "deadline_change_logs")
+@EntityListeners(AuditingEntityListener.class)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,8 +22,9 @@ public class DeadlineChangeLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "order_id", nullable = false)
-    Long orderId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false)
+    Order order;
 
     @Column(name = "old_deadline", nullable = false)
     LocalDate oldDeadline;
@@ -33,13 +38,7 @@ public class DeadlineChangeLog {
     @Column(name = "changed_by", nullable = false)
     Long changedBy;
 
-    @Column(name = "changed_at", updatable = false) 
-    java.time.LocalDateTime changedAt;
-
-    @PrePersist
-    protected void onCreate() {
-        if (this.changedAt == null) {
-            this.changedAt = java.time.LocalDateTime.now();
-        }
-    }
+    @CreatedDate
+    @Column(name = "changed_at", updatable = false)
+    LocalDateTime changedAt;
 }

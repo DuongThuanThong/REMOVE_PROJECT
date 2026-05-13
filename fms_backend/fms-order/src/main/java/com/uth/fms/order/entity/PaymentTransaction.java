@@ -2,26 +2,18 @@ package com.uth.fms.order.entity;
 
 import com.uth.fms.common.enums.PaymentMethod;
 import com.uth.fms.common.enums.PaymentType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.FieldDefaults;
 
 @Entity
 @Table(name = "payment_transactions")
+@EntityListeners(AuditingEntityListener.class)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,8 +25,9 @@ public class PaymentTransaction {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 
-	@Column(name = "order_id", nullable = false)
-	Long orderId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "order_id", nullable = false)
+	Order order;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type", nullable = false, length = 20)
@@ -53,13 +46,7 @@ public class PaymentTransaction {
 	@Column(name = "recorded_by", nullable = false)
 	Long recordedBy;
 
+	@CreatedDate
 	@Column(name = "created_at", updatable = false)
 	LocalDateTime createdAt;
-
-	@PrePersist
-	protected void onCreate() {
-		if (this.createdAt == null) {
-			this.createdAt = LocalDateTime.now();
-		}
-	}
 }

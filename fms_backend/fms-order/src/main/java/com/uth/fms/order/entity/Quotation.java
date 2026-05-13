@@ -1,6 +1,8 @@
 package com.uth.fms.order.entity;
 
 import com.uth.fms.common.entity.BaseEntity;
+import com.uth.fms.common.enums.QuotationStatus;
+import com.uth.fms.common.enums.PriceStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -9,9 +11,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import com.uth.fms.common.enums.QuotationStatus;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 
 @Entity
 @Table(name = "quotations")
@@ -32,8 +31,9 @@ public class Quotation extends BaseEntity {
     @Column(name = "sale_id", nullable = false)
     Long saleId;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "price_type", nullable = false, length = 10)
-    String priceType;
+    PriceStatus priceType;
 
     @Column(name = "subtotal", precision = 15, scale = 2)
     BigDecimal subtotal;
