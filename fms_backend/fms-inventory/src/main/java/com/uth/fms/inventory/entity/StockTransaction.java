@@ -1,8 +1,11 @@
 package com.uth.fms.inventory.entity;
 
 import com.uth.fms.common.entity.BaseEntity;
+import com.uth.fms.common.enums.TransactionType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -35,8 +38,9 @@ public class StockTransaction extends BaseEntity {
     @JoinColumn(name = "warehouse_id", nullable = false)
     Warehouse warehouse;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "transaction_type", nullable = false)
-    String transactionType;
+    TransactionType transactionType;
 
     @Column(nullable = false)
     BigDecimal quantity;

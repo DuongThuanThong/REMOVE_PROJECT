@@ -1,6 +1,5 @@
 package com.uth.fms.inventory.entity;
 
-import com.uth.fms.common.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -20,10 +19,13 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Table(name = "warehouses")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Warehouse extends BaseEntity {
+public class Warehouse {
 
     @Column(nullable = false)
     String name;
 
     String location;
+
+    @Column(name = "is_active")
+    Boolean active;
 }

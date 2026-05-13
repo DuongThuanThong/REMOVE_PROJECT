@@ -1,11 +1,15 @@
 package com.uth.fms.inventory.entity;
 
 import com.uth.fms.common.entity.BaseEntity;
+import com.uth.fms.common.enums.PurchaseRequestStatus;
+import com.uth.fms.user.entity.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -28,12 +32,21 @@ public class PurchaseRequest extends BaseEntity {
     @Column(nullable = false, unique = true)
     String code;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    String status;
+    PurchaseRequestStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supplier_id")
     Supplier supplier;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "approved_by")
+    User approvedBy;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "requested_by", nullable = false)
+    User requestedBy;
 
     String note;
 }

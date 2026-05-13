@@ -25,10 +25,13 @@ public class Supplier extends BaseEntity {
     @Column(nullable = false)
     String name;
 
+    @Column(nullable = true)
     String phone;
 
+    @Column(nullable = true)
     String email;
 
+    @Column(nullable = true)
     String address;
 
     @Column(name = "tax_code")

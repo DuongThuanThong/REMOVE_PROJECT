@@ -1,6 +1,5 @@
 package com.uth.fms.inventory.entity;
 
-import com.uth.fms.common.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,7 +24,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Table(name = "purchase_request_items")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PurchaseRequestItem extends BaseEntity {
+public class PurchaseRequestItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "purchase_request_id", nullable = false)
@@ -38,8 +37,9 @@ public class PurchaseRequestItem extends BaseEntity {
     @Column(name = "qty_requested", nullable = false)
     BigDecimal qtyRequested;
 
-    @Column(name = "qty_received")
-    BigDecimal qtyReceived;
+    @Builder.Default
+    @Column(name = "qty_received", nullable = false)
+    BigDecimal qtyReceived = BigDecimal.ZERO;
 
     @Column(name = "estimated_price")
     BigDecimal estimatedPrice;
