@@ -3,7 +3,12 @@ package com.uth.fms.order.entity;
 import com.uth.fms.common.enums.PaymentMethod;
 import com.uth.fms.common.enums.PaymentType;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -14,7 +19,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "payment_transactions")
 @EntityListeners(AuditingEntityListener.class)
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
