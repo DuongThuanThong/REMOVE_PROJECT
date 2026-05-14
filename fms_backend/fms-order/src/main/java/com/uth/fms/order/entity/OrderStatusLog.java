@@ -16,10 +16,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "order_status_logs")
+@EntityListeners(AuditingEntityListener.class)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,8 +38,9 @@ public class OrderStatusLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "order_id", nullable = false)
-    Long orderId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false)
+    Order order;
 
     @Column(name = "note", columnDefinition = "TEXT")
     String note;
@@ -45,13 +53,10 @@ public class OrderStatusLog {
     @Column(name = "to_status", nullable = false, length = 30)
     OrderStatus toStatus;
 
+    @Column(name = "changed_by", nullable = false)
+    Long changedBy;
+
+    @CreatedDate
     @Column(name = "changed_at", updatable = false)
     LocalDateTime changedAt;
-
-    @PrePersist
-    protected void onCreate() {
-        if (this.changedAt == null) {
-            this.changedAt = LocalDateTime.now();
-        }
-    }
 }

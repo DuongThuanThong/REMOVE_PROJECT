@@ -1,6 +1,9 @@
 package com.uth.fms.order.entity;
 
 import com.uth.fms.common.entity.BaseEntity;
+import com.uth.fms.common.enums.OrderStatus;
+import com.uth.fms.common.enums.CancelType;
+import com.uth.fms.common.enums.PriceStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -41,7 +44,6 @@ public class Order extends BaseEntity {
     OrderStatus status; 
 
     @Column(name = "price_type", nullable = false, length = 10)
-    String priceType; 
 
     @Column(name = "total_amount", precision = 15, scale = 2)
     BigDecimal totalAmount; 

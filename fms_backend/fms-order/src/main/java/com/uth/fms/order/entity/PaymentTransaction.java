@@ -13,6 +13,9 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.CreatedDate;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,8 +36,9 @@ public class PaymentTransaction {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 
-	@Column(name = "order_id", nullable = false)
-	Long orderId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "order_id", nullable = false)
+	Order order;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type", nullable = false, length = 20)
@@ -53,13 +57,7 @@ public class PaymentTransaction {
 	@Column(name = "recorded_by", nullable = false)
 	Long recordedBy;
 
+	@CreatedDate
 	@Column(name = "created_at", updatable = false)
 	LocalDateTime createdAt;
-
-	@PrePersist
-	protected void onCreate() {
-		if (this.createdAt == null) {
-			this.createdAt = LocalDateTime.now();
-		}
-	}
 }

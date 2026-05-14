@@ -1,6 +1,8 @@
 package com.uth.fms.order.entity;
 
 import com.uth.fms.common.enums.BomType;
+import jakarta.persistence.*;
+import lombok.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -19,6 +21,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
+
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "quotation_items")

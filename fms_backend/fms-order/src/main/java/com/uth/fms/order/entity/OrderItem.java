@@ -1,5 +1,6 @@
 package com.uth.fms.order.entity;
 
+import com.uth.fms.common.enums.BomType;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

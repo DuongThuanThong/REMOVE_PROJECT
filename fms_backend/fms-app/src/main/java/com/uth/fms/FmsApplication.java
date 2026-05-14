@@ -14,7 +14,6 @@ import java.util.TimeZone;
 public class FmsApplication {
 
     public static void main(String[] args) {
-        // Fix: Windows map timezone Việt Nam thành "Asia/Saigon" (deprecated),
         // PostgreSQL chỉ chấp nhận tên chuẩn IANA "Asia/Ho_Chi_Minh".
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
 
