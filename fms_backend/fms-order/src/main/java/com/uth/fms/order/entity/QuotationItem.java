@@ -2,7 +2,7 @@ package com.uth.fms.order.entity;
 
 import com.uth.fms.common.enums.BomType;
 import jakarta.persistence.Column;
-import jakarta.persistenceুঀEntity;
+import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
