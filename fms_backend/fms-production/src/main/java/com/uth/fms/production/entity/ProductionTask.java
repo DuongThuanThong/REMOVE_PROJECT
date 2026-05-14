@@ -4,6 +4,7 @@ import com.uth.fms.common.entity.BaseEntity;
 // import com.uth.fms.user.entity.User;
 import com.uth.fms.common.enums.TaskStatus;
 import com.uth.fms.common.enums.TaskType;
+
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -11,6 +12,9 @@ import lombok.experimental.FieldDefaults;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Getter
@@ -20,7 +24,12 @@ import java.time.LocalDateTime;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "production_tasks")
-public class ProductionTask extends BaseEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class ProductionTask {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "production_order_id", nullable = false)
@@ -52,11 +61,14 @@ public class ProductionTask extends BaseEntity {
     @Column(precision = 12, scale = 2, name = "labor_cost")
     private BigDecimal laborCost = BigDecimal.ZERO;
 
+    @CreatedDate
     private LocalDate deadline;
 
+    @CreatedDate
     @Column(name = "started_at")
     private LocalDateTime startedAt;
 
+    @CreatedDate
     @Column(name = "completed_at")
     private LocalDateTime completedAt;
 }

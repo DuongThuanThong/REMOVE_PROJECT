@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Getter
@@ -15,6 +16,7 @@ import java.math.BigDecimal;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "product_templates")
+@EntityListeners(AuditingEntityListener.class)
 public class ProductTemplate extends BaseEntity {
 
     @Column(unique = true, nullable = false, length = 30)
@@ -32,8 +34,4 @@ public class ProductTemplate extends BaseEntity {
     @Builder.Default
     @Column(nullable = false)
     private Boolean isActive = true;
-
-    @Builder.Default
-    @Column(nullable = false, name = "is_deleted")
-    private Boolean isDeleted = false;
 }

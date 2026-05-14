@@ -2,11 +2,14 @@ package com.uth.fms.production.entity;
 
 import com.uth.fms.common.entity.BaseEntity;
 // import com.uth.fms.material.entity.Material;
+
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Getter
@@ -16,6 +19,7 @@ import java.math.BigDecimal;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "product_boms")
+@EntityListeners(AuditingEntityListener.class)
 public class ProductBom extends BaseEntity {
 
     // @ManyToOne(fetch = FetchType.LAZY)

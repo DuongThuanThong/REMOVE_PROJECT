@@ -2,11 +2,15 @@ package com.uth.fms.production.entity;
 
 import com.uth.fms.common.entity.BaseEntity;
 // import com.uth.fms.user.entity.User;
+
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Getter
@@ -16,7 +20,12 @@ import java.time.LocalDateTime;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "task_assignment_logs")
-public class TaskAssignmentLog extends BaseEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class TaskAssignmentLog {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id", nullable = false)
@@ -33,6 +42,7 @@ public class TaskAssignmentLog extends BaseEntity {
     @Column(columnDefinition = "text")
     private String reason;
 
+    @CreatedDate
     @Column(name = "assigned_at", nullable = false, updatable = false)
     private LocalDateTime assignedAt;
 }

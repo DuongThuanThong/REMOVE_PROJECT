@@ -3,12 +3,16 @@ package com.uth.fms.production.entity;
 import com.uth.fms.common.entity.BaseEntity;
 // import com.uth.fms.user.entity.User;
 // import com.uth.fms.worker.entity.Worker;
+
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Getter
@@ -18,7 +22,12 @@ import java.time.LocalDateTime;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "production_task_workers")
-public class ProductionTaskWorker extends BaseEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class ProductionTaskWorker {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id", nullable = false)
@@ -44,6 +53,7 @@ public class ProductionTaskWorker extends BaseEntity {
     // @JoinColumn(name = "recorded_by", nullable = false)
     // private User recordedBy;
 
+    @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 }

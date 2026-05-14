@@ -2,11 +2,14 @@ package com.uth.fms.customer.entity;
 
 import com.uth.fms.common.entity.BaseEntity;
 // import com.uth.fms.user.entity.User;
+
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Getter
@@ -16,6 +19,7 @@ import java.math.BigDecimal;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "customers")
+@EntityListeners(AuditingEntityListener.class)
 public class Customer extends BaseEntity {
 
     @Column(nullable = false, length = 100)
@@ -45,8 +49,4 @@ public class Customer extends BaseEntity {
     // @JoinColumn(name = "created_by", foreignKey = @ForeignKey(name =
     // "fk_customers_created_by"))
     // private User createdBy;
-
-    @Builder.Default
-    @Column(name = "is_deleted", nullable = false)
-    private Boolean isDeleted = false;
 }

@@ -5,12 +5,16 @@ import com.uth.fms.common.entity.BaseEntity;
 // import com.uth.fms.order.entity.Order;
 import com.uth.fms.common.enums.BomType;
 import com.uth.fms.common.enums.ProductionOrderStatus;
+
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Getter
@@ -20,6 +24,7 @@ import java.time.LocalDate;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "production_orders")
+@EntityListeners(AuditingEntityListener.class)
 public class ProductionOrder extends BaseEntity {
 
     @Column(unique = true, nullable = false, length = 30)
@@ -37,9 +42,11 @@ public class ProductionOrder extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ProductionOrderStatus status;
 
+    @CreatedDate
     @Column(name = "planned_start_date")
     private LocalDate plannedStartDate;
 
+    @CreatedDate
     @Column(name = "planned_end_date")
     private LocalDate plannedEndDate;
 
@@ -51,8 +58,4 @@ public class ProductionOrder extends BaseEntity {
 
     @Column(precision = 15, scale = 2, name = "actual_waste_cost")
     private BigDecimal actualWasteCost = BigDecimal.ZERO;
-
-    @Builder.Default
-    @Column(name = "is_deleted", nullable = false)
-    private Boolean isDeleted = false;
 }
