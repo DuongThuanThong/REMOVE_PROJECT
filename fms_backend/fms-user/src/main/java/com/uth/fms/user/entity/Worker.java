@@ -27,8 +27,9 @@ public class Worker extends BaseEntity {
     @Column(nullable = false, length = 30)
     String skill;
 
-    @Column(name = "team_leader_id")
-    Long teamLeaderId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_leader_id")
+    User teamLeader;
 
     @Column(nullable = false, precision = 10, scale = 2)
     BigDecimal dailyRate;

@@ -1,9 +1,17 @@
 package com.uth.fms.production.entity;
 
-import com.uth.fms.common.entity.BaseEntity;
+import com.uth.fms.production.enums.ApprovalStatus;
+import com.uth.fms.production.enums.ProductionFileType;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -13,7 +21,12 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "production_files")
-public class ProductionFile extends BaseEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class ProductionFile {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
 
     @Column(name = "production_order_id", nullable = false)
     Long productionOrderId;
@@ -21,8 +34,9 @@ public class ProductionFile extends BaseEntity {
     @Column(name = "task_id")
     Long taskId;
 
-    @Column(name = "file_type", nullable = false, length = 20)
-    String fileType;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "file_type", nullable = false, length = 30)
+    ProductionFileType fileType;
 
     @Column(name = "file_url", nullable = false, length = 500)
     String fileUrl;
@@ -35,9 +49,29 @@ public class ProductionFile extends BaseEntity {
     @Column(name = "is_latest", nullable = false)
     Boolean isLatest = true;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "approval_status", length = 20)
-    String approvalStatus;
+    ApprovalStatus approvalStatus;
 
     @Column(name = "uploaded_by", nullable = false)
     Long uploadedBy;
+
+    @CreatedDate
+    @Column(name = "create_at", updatable = false, nullable = false)
+    LocalDateTime createTime;
+
+    @LastModifiedDate
+    @Column(name = "update_at", nullable = false)
+    LocalDateTime updateTime;
+
+    @CreatedBy
+    @Column(name = "created_by", updatable = false)
+    String createdBy;
+
+    @LastModifiedBy
+    @Column(name = "updated_by")
+    String updatedBy;
+
+    @Column(name = "is_deleted")
+    Boolean deleteFlag;
 }
