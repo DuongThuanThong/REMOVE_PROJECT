@@ -31,6 +31,7 @@ import jakarta.persistence.Enumerated;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 @EqualsAndHashCode(callSuper = true) 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Order extends BaseEntity {
