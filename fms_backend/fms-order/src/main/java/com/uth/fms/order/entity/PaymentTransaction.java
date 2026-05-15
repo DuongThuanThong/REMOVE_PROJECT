@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -49,6 +50,7 @@ public class PaymentTransaction {
 	@Column(name = "receipt_image_url", length = 500)
 	String receiptImageUrl;
 
+	@CreatedBy
 	@Column(name = "recorded_by", nullable = false)
 	Long recordedBy;
 

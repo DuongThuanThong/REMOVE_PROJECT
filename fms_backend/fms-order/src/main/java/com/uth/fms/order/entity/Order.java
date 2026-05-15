@@ -19,6 +19,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import com.uth.fms.common.enums.OrderStatus;
+import com.uth.fms.common.enums.CancelType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 @Entity
 @Table(name = "orders")
@@ -47,9 +51,8 @@ public class Order extends BaseEntity {
     @Column(name = "status", nullable = false, length = 30)
     OrderStatus status; 
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "price_type", nullable = false, length = 10)
-    PriceStatus priceType; 
+    PriceStatus priceType;
 
     @Column(name = "total_amount", precision = 15, scale = 2)
     BigDecimal totalAmount; 

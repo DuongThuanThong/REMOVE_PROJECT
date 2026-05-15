@@ -6,6 +6,7 @@ include(
     "fms-user",      
     "fms-order",   
     "fms-customer",  
-    "fms-production", 
+    "fms-product",
+    "fms-manufacturing", 
     "fms-inventory"   
 )

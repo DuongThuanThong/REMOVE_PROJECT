@@ -10,8 +10,9 @@ dependencies {
     implementation(project(":fms-user"))
     implementation(project(":fms-order"))
     implementation(project(":fms-customer"))
-    implementation(project(":fms-production"))
+    implementation(project(":fms-product"))
     implementation(project(":fms-inventory"))
+    implementation(project(":fms-manufacturing"))
 
 
     runtimeOnly("org.postgresql:postgresql")

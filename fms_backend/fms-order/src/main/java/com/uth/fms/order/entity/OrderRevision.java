@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -38,6 +39,7 @@ public class OrderRevision {
     @Column(name = "revision_note", columnDefinition = "TEXT")
     String revisionNote;
 
+    @CreatedBy
     @Column(name = "changed_by", nullable = false)
     Long changedBy;
 
