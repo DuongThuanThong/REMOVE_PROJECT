@@ -22,7 +22,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Supplier extends BaseEntity {
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     String name;
 
     @Column(nullable = true)

@@ -44,6 +44,7 @@ public class Order extends BaseEntity {
     OrderStatus status; 
 
     @Column(name = "price_type", nullable = false, length = 10)
+    PriceStatus priceType;
 
     @Column(name = "total_amount", precision = 15, scale = 2)
     BigDecimal totalAmount; 

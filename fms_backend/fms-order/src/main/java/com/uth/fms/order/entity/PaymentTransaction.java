@@ -2,18 +2,12 @@ package com.uth.fms.order.entity;
 
 import com.uth.fms.common.enums.PaymentMethod;
 import com.uth.fms.common.enums.PaymentType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 
 import lombok.AccessLevel;
@@ -54,6 +48,7 @@ public class PaymentTransaction {
 	@Column(name = "receipt_image_url", length = 500)
 	String receiptImageUrl;
 
+	@CreatedBy
 	@Column(name = "recorded_by", nullable = false)
 	Long recordedBy;
 

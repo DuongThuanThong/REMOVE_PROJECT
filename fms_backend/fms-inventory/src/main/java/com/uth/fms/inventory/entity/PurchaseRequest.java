@@ -2,7 +2,6 @@ package com.uth.fms.inventory.entity;
 
 import com.uth.fms.common.entity.BaseEntity;
 import com.uth.fms.common.enums.PurchaseRequestStatus;
-import com.uth.fms.user.entity.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -40,13 +39,11 @@ public class PurchaseRequest extends BaseEntity {
     @JoinColumn(name = "supplier_id")
     Supplier supplier;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "approved_by")
-    User approvedBy;
+    @Column(name = "approved_by")
+    Long approvedBy;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "requested_by", nullable = false)
-    User requestedBy;
+    @Column(name = "requested_by", nullable = false)
+    Long requestedBy;
 
     String note;
 }

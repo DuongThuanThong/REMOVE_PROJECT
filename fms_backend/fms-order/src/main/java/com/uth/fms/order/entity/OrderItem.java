@@ -6,7 +6,6 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
-import com.uth.fms.common.enums.BomType;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 

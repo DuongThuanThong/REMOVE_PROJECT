@@ -40,13 +40,6 @@ public class Customer extends BaseEntity {
     @Column(columnDefinition = "text")
     private String note;
 
-    // @ManyToOne(fetch = FetchType.LAZY)
-    // @JoinColumn(name = "assigned_sale", foreignKey = @ForeignKey(name =
-    // "fk_customers_assigned_sale"))
-    // private User assignedSale;
-
-    // @ManyToOne(fetch = FetchType.LAZY)
-    // @JoinColumn(name = "created_by", foreignKey = @ForeignKey(name =
-    // "fk_customers_created_by"))
-    // private User createdBy;
+     @Column(name = "assigned_sale")
+     Long assignedSale;
 }

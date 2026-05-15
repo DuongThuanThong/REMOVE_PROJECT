@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -53,6 +54,7 @@ public class OrderStatusLog {
     @Column(name = "to_status", nullable = false, length = 30)
     OrderStatus toStatus;
 
+    @CreatedBy
     @Column(name = "changed_by", nullable = false)
     Long changedBy;
 

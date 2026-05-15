@@ -1,8 +1,6 @@
 package com.uth.fms.inventory.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,10 +18,14 @@ import lombok.experimental.FieldDefaults;
 @Table(name = "warehouses")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Warehouse {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
 
     @Column(nullable = false)
     String name;
 
+    @Column(columnDefinition = "TEXT")
     String location;
 
     @Column(name = "is_active")

@@ -25,10 +25,10 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class MaterialCategory extends BaseEntity {
 
-    @Column(name = "category_code", nullable = false, unique = true)
+    @Column(name = "category_code", nullable = false, unique = true, length = 20)
     String categoryCode;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     String name;
 
     @ManyToOne(fetch = FetchType.LAZY)

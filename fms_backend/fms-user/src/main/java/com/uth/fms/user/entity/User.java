@@ -15,19 +15,19 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "users")
 public class User extends BaseEntity {
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 50)
     String username;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 255)
     String password;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 100)
     String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     String fullName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "phone_number", length = 20)
     String phoneNumber;
 
     @Enumerated(EnumType.STRING)

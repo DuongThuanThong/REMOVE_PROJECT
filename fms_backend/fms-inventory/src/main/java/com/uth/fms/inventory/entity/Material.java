@@ -33,22 +33,25 @@ public class Material extends BaseEntity {
     @Column(name = "material_code", nullable = false, unique = true)
     String materialCode;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 255)
     String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length =20)
     String unit;
 
-    @Column(name = "current_stock", nullable = false)
-    BigDecimal currentStock;
+    @Builder.Default
+    @Column(name = "current_stock", nullable = false, precision = 12, scale = 3)
+    BigDecimal currentStock =  BigDecimal.ZERO;
 
-    @Column(name = "reserved_stock", nullable = false)
-    BigDecimal reservedStock;
+    @Builder.Default
+    @Column(name = "reserved_stock", nullable = false, precision = 12, scale = 3)
+    BigDecimal reservedStock = BigDecimal.ZERO;
 
-    @Column(name = "min_stock", nullable = false)
-    BigDecimal minStock;
+    @Builder.Default
+    @Column(name = "min_stock", nullable = false, precision = 12, scale = 3)
+    BigDecimal minStock= BigDecimal.ZERO;
 
-    @Column(name = "unit_price", nullable = false)
+    @Column(name = "unit_price", nullable = false, precision = 15, scale = 3)
     BigDecimal unitPrice;
 
     @Enumerated(EnumType.STRING)

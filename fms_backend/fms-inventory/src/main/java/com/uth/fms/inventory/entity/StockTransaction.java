@@ -42,10 +42,10 @@ public class StockTransaction extends BaseEntity {
     @Column(name = "transaction_type", nullable = false)
     TransactionType transactionType;
 
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 12, scale = 3)
     BigDecimal quantity;
 
-    @Column(name = "reference_type")
+    @Column(name = "reference_type", length = 30)
     String referenceType;
 
     @Column(name = "reference_id")
@@ -54,7 +54,7 @@ public class StockTransaction extends BaseEntity {
     @Column(name = "performed_by")
     Long performedById;
 
-    @Column(name = "lot_number")
+    @Column(name = "lot_number", length= 50)
     String lotNumber;
 
     @Column(name = "unit_cost")
