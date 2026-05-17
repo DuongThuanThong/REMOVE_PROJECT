@@ -4,7 +4,7 @@ import type {UserSummary} from "../../models/user.ts";
 export interface LoginResponse{
     accessToken: string;
     refreshToken: string;
-    roles: Role;
+    role: Role;
     user: UserSummary;
 }
 

@@ -12,6 +12,9 @@ export default {
           DEFAULT: '#2d6a4f', // Màu xanh đậm (cho button, link)
           hover: '#40916c',
           dark: '#1a2e25',
+          active: '#1a2e25',        // Xanh lúc click
+          accent: '#4ade80',        // Xanh lá sáng neon (cho thông báo/trạng thái)
+          shadow : '#0a1f14',
         },
         // Màu nền
         page: '#f5f3ee',     // Nền tổng thể
@@ -19,12 +22,13 @@ export default {
         sidebar: '#1a2e25',  // Nền sidebar
         rowHover: '#fafaf7', // Nền hover dòng table
         // Màu chữ
-        heading: '#1a2e25',  // Tiêu đề
-        body: '#2c2c2a',     // Chữ nội dung
-        secondary: '#5f5e5a',// Chữ phụ
+        title: '#1a2e25',  // Tiêu đề
+        text: '#2c2c2a',     // Chữ nội dung
+        text_secondary: '#5f5e5a',// Chữ phụ
         muted: '#888780',    // Chữ mờ, placeholder
         // Màu viền
         border: '#e8e6df',
+        borderLight: '#f0ede6',
         divider: '#f0ede6',
         // Trạng thái
         success: {
@@ -51,7 +55,22 @@ export default {
         'card': '0 2px 8px rgba(0,0,0,0.05)',
         'modal': '-4px 0 24px rgba(0,0,0,0.12)',
       }
+      ,
+      // 3. Tinh chỉnh Cỡ chữ (Typography Scale)
+      fontSize: {
+        // [Cỡ chữ, Chiều cao dòng (Line-height)]
+        'fms-xs': ['11px', '16px'],    // Dùng cho label, tag nhỏ
+        'fms-sm': ['13px', '20px'],    // Dùng cho mô tả phụ
+        'fms-base': ['14px', '22px'],  // Chuẩn đọc văn bản của AntD
+        'fms-lg': ['16px', '24px'],    // Tiêu đề form/card
+        'fms-xl': ['20px', '28px'],    // Tiêu đề trang (Heading 2)
+        'fms-2xl': ['28px', '36px'],   // Tiêu đề tổng (Heading 1)
+      }
     },
+  },
+  corePlugins: {
+    // Tắt bộ reset CSS mặc định của Tailwind để không làm vỡ giao diện nút/bảng của Ant Design
+    preflight: false,
   },
   plugins: [],
 }
