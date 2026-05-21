@@ -15,5 +15,7 @@ public class LoginResponse {
     String tokenType = "Bearer";
     String username;
     String fullName;
+    String email;
+    String phoneNumber;
     String roles;
 }
